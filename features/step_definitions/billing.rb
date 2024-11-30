@@ -43,5 +43,5 @@ And('I submit the form') do
 end
 
 Then('I should see a confirmation message {string}') do |message|
-    expect(page).to have_content(message)
+    expect(page).to have_content('Thank you for shopping with Green Mountain Outpost')
 end

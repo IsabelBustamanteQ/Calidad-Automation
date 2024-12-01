@@ -24,4 +24,29 @@ Feature: Billing Information View
     | Expiration     | 12/94               |
   And I check the "Same as Bill To" checkbox
   And I submit the form
-  Then I should see a confirmation message "Order placed successfully"
+  Then I should see the order confirmation page
+
+  Scenario: Billing and shipping information are different
+  When I fill in the billing form with valid details
+    | Field          | Value               |
+    | Name           | John Doe            |
+    | Address        | 123 Main St         |
+    | City           | Springfield         |
+    | State          | IL                  |
+    | Zip            | 62704               |
+    | Phone          | 555-123-4567        |
+    | E-mail         | john@example.com    |
+    | Card Type      | Visa                |
+    | Card Number    | 4111111111111111    |
+    | Expiration     | 12/97             |
+  And I uncheck the "Same as Bill To" checkbox
+  And I fill in the shipping form with valid details
+    | Field          | Value               |
+    | Name           | Jane Smith          |
+    | Address        | 456 Elm St          |
+    | City           | Shelbyville         |
+    | State          | MO                  |
+    | Zip            | 63019               |
+    | Phone          | 555-987-6543        |
+  And I submit the form
+  Then I should see the order confirmation page

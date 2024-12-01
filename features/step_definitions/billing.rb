@@ -42,6 +42,6 @@ And('I submit the form') do
     click_button 'bSubmit'
 end
 
-Then('I should see a confirmation message {string}') do |message|
+Then('I should see the order confirmation page') do
     expect(page).to have_content('Thank you for shopping with Green Mountain Outpost')
 end

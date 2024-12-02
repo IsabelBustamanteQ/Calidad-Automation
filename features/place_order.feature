@@ -4,8 +4,10 @@ Feature: Place an order in the online catalog
   So that I can place an order successfully
 
 
-  Scenario Outline: Ordering items with specific quantities
+  Background:
     Given I am on the online catalog homepage
+
+  Scenario Outline: Ordering items with specific quantities
     When I select "<quantities_and_items_name>"
     And I click the "Place An Order" button
     Then the selected items with their respective quantities should appear in the order summary

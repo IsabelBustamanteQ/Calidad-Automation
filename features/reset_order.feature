@@ -3,6 +3,9 @@ Feature: Resetting the form in the online catalog
   I want to reset all selected quantities in the catalog
   So that I can clear the form and start a new selection
 
+  Background:
+    Given I am on the online catalog homepage
+
   Scenario Outline: Resetting quantities after selecting items
     Given I am on the online catalog homepage
     When I select "<quantities_and_items_name>"

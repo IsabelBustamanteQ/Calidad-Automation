@@ -1,6 +1,6 @@
 Given(/^I am on the online catalog homepage$/) do
   page.driver.browser.manage.window.maximize
-  visit('/online-catalog.htm') 
+  visit('https://demo.borland.com/gmopost/online-catalog.htm') 
 end
 
 When(/^I select "([^"]*)"$/) do |quantities_and_items_name|

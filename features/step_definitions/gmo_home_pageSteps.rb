@@ -1,4 +1,8 @@
-
+#Given I am on the Google homepage
+Given(/^I am on the Google homepage$/) do
+  page.driver.browser.manage.window.maximize
+  visit ('/')
+end
 #   When I visit https://demo.borland.com/gmopost/
 When('I visit GMO OnLine') do
   visit('https://demo.borland.com/gmopost/')

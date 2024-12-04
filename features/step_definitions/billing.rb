@@ -33,11 +33,16 @@ When('I fill in the billing form with invalid details') do |table|
 end
 
 Then('I should see an alert with the text {string}') do |string|
-    # alert = page.driver.browser.switch_to.alert
-    # expect(alert.text).to eq(string)
-    # alert.accept
+    alert = page.driver.browser.switch_to.alert
+    expect(alert.text).to eq(string)
+    alert.accept
     # sleep(10)  # Pause for 2 seconds
-    accept_alert(string)
+end
+
+# Helper function for email validation
+def valid_email_format?(email)
+    email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+    email_regex.match?(email)
 end
 
 When('I fill in the billing form without providing mandatory fields') do |table|
@@ -108,6 +113,10 @@ And('I submit the form') do
     click_button 'bSubmit'
 end
 
+Then('I should see the order confirmation page with different bill,ship data') do
+    expect(page).to have_content('Thank you for shopping with Green Mountain Outpost')
+end
 Then('I should see the order confirmation page') do
     expect(page).to have_content('Thank you for shopping with Green Mountain Outpost')
+    expect(page).to have_content('John Doe')
 end

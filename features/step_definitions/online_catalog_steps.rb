@@ -1,11 +1,13 @@
-Given(/^I am on the online catalog homepage$/) do
-  page.driver.browser.manage.window.maximize
-  visit('https://demo.borland.com/gmopost/online-catalog.htm') 
+Then(/^I am on the online catalog homepage$/) do
+  expect(page).to have_content("OnLine Catalog")
+  catalog_table_rows = all(:xpath, "/html/body/form/table/tbody/tr[2]/td/div/center/table/tbody/tr")
+  expect(catalog_table_rows.length).to be > 1
+  expect(page).to have_button("Place An Order")   
 end
+
 
 When(/^I select "([^"]*)"$/) do |quantities_and_items_name|
   items_and_quantities = quantities_and_items_name.split(',').map(&:strip)
-  @selected_items = {}
 
   items_and_quantities.each do |item_and_quantity|
     quantity, item_name = item_and_quantity.split(' ', 2)
@@ -70,4 +72,10 @@ Then(/^the total price should be calculated correctly$/) do
   rows = table.all(:xpath, "tbody/tr")
   product_total_cell = find(:xpath, "/html/body/form/table/tbody/tr[1]/td/div/center/table/tbody/tr[#{rows.length - 3}]/td[3]")
   expect(product_total_cell.text).to eq(formatted_total)
+end
+
+
+Then(/^I should see an alert with the message "([^"]*)"$/) do |expected_message|
+  alert = page.driver.browser.switch_to.alert
+  expect(alert.text).to eq(expected_message)
 end

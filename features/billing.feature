@@ -9,7 +9,7 @@ Feature: Billing Information View
     And I proceed with the order
     Then I should see the billing information page
     
-  @onlyThis
+  @maximize
   Scenario: Billing and shipping information are the same
   When I fill in the billing form with valid details
     | Field          | Value               |
@@ -27,6 +27,7 @@ Feature: Billing Information View
   And I submit the form
   Then I should see the order confirmation page
 
+  @maximize
   Scenario: Billing and shipping information are different
   When I fill in the billing form with valid details
     | Field          | Value               |
@@ -52,6 +53,7 @@ Feature: Billing Information View
   And I submit the form
   Then I should see the order confirmation page with different bill,ship data
 
+  @maximize
   Scenario: Credit card expiration date is invalid
   When I fill in the billing form with valid details
     | Field          | Value               |
@@ -69,6 +71,7 @@ Feature: Billing Information View
   And I submit the form
   Then I should see an alert with the text "Please enter a valid date of the form 'MM/YY' in this field."
 
+  @maximize
   Scenario: Billing form has missing required fields
     When I fill in the billing form with invalid details
       | Field          | Value               |
@@ -85,6 +88,7 @@ Feature: Billing Information View
     And I submit the form
     Then I should see an alert with the text "This is a required field."
 
+  @maximize
   Scenario: "Same as Bill To" checkbox is not checked and shipping form is empty
     When I fill in the billing form with valid details
       | Field          | Value               |
@@ -103,6 +107,7 @@ Feature: Billing Information View
     And I submit the form
     Then I should see an alert with the text "This is a required field."
 
+  @maximize
   Scenario: "Same as Bill To" checkbox is not checked and shipping form is empty
     When I fill in the billing form with valid details
       | Field          | Value               |
@@ -121,6 +126,7 @@ Feature: Billing Information View
     And I submit the form
     Then I should see an alert with the text "This is a required field."
 
+  @maximize
   Scenario: Billing form contains invalid email format
     When I fill in the billing form with invalid details
       | Field          | Value               |
@@ -138,6 +144,7 @@ Feature: Billing Information View
     And I submit the form
     Then I should see an alert with the text "Invalid email format. Please enter a valid email."
 
+  @maximize
   Scenario: Successful submission with edge-case data
     When I fill in the billing form with edge-case details
       | Field          | Value                     |
@@ -155,6 +162,7 @@ Feature: Billing Information View
     And I submit the form
     Then I should see the order confirmation page
 
+  @maximize
   Scenario: Invalid phone number format
     When I fill in the billing form with invalid phone number
       | Field          | Value               |
@@ -162,6 +170,7 @@ Feature: Billing Information View
     And I submit the form
     Then I should see an alert with the text "This is a required field."
 
+  @maximize
   Scenario: Invalid phone number length
     When I fill in the billing form with invalid phone number
       | Field          | Value               |
@@ -169,6 +178,7 @@ Feature: Billing Information View
     And I submit the form
     Then I should see an alert with the text "This is a required field."
 
+  @maximize
   Scenario: Missing mandatory billing details
     When I fill in the billing form without providing mandatory fields
       | Field          | Value               |
@@ -177,6 +187,7 @@ Feature: Billing Information View
     And I submit the form
     Then I should see an alert with the text "This is a required field."
 
+  @maximize
   Scenario: Billing form contains an invalid ZIP code
     When I fill in the billing form with invalid details
       | Field          | Value               |

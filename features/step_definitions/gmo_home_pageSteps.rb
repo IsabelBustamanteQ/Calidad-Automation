@@ -21,11 +21,17 @@ When(/^I will click "([^"]*)" button$/) do |enterButton|
 end
 # And I see a table with products to buy
 Then('I see a table with products to buy') do
-  address = find(:xpath, '/html/body/form/table/tbody/tr[2]/td/div/center/table/tbody/tr[2]/td[2]/a')
-  
-  if address.text != "3 Person Dome Tent"
-    raise "Product not found"
-  end
+  @hasItems=true
+  catalog_table = find(:xpath, "/html/body/form/table/tbody/tr[2]/td/div/center/table")
+    catalog_rows = catalog_table.all(:xpath, "tbody/tr")
+    catalog_rows.each_with_index do |row, index|
+      if index > 0         
+        if row.find(:xpath, "td[2]/a/strong").text == ""
+          @hasItems=false
+        end
+      end
+    end
+    expect(@hasItems).to eq(true)
 end
 
 # Given I am on GMO OnLine Catalog Page

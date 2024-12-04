@@ -6,7 +6,7 @@
 # GMO PAGE TESTING
 This project is a set of automated Smoke tests for the <a href=https://demo.borland.com/gmopost/>GMO Page</a>
 
-GMO Page is a demonstration website that simulates an online catalog for virtual stores. It allows you to experiment with typical e-commerce functions, such as product navigation, shopping cart and order simulation.
+<a href=https://demo.borland.com/gmopost/>GMO Page</a> is a demonstration website that simulates an online catalog for virtual stores. It allows you to experiment with typical e-commerce functions, such as product navigation, shopping cart and order simulation.
 ## FEATURES
 ### gmo_home_page.feature
 Scenarios for testing the home page and catalog of the website

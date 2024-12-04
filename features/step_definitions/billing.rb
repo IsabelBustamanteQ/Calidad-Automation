@@ -116,16 +116,7 @@ end
 Then('I should see the order confirmation page with different bill,ship data') do
     expect(page).to have_content('Thank you for shopping with Green Mountain Outpost')
 end
-# Then('I should see the order confirmation page') do
-#     expect(page).to have_content('Thank you for shopping with Green Mountain Outpost')
-#     expect(page).to have_content('John Doe')
-# end
-Then('I should see the order confirmation page') do |table|
-    billing_data = table.rows_hash
-    
-    # Verify the confirmation message
+Then('I should see the order confirmation page') do
     expect(page).to have_content('Thank you for shopping with Green Mountain Outpost')
-    
-    # Dynamically verify the name from the input data
-    expect(page).to have_content(billing_data['Name'])
-  end
+    expect(page).to have_content('John Doe')
+end

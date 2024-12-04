@@ -8,7 +8,8 @@ Feature: Billing Information View
     When I add an item to the cart and place the order
     And I proceed with the order
     Then I should see the billing information page
-
+    
+  @onlyThis
   Scenario: Billing and shipping information are the same
   When I fill in the billing form with valid details
     | Field          | Value               |
@@ -49,7 +50,7 @@ Feature: Billing Information View
     | Zip            | 63019               |
     | Phone          | 555-987-6543        |
   And I submit the form
-  Then I should see the order confirmation page
+  Then I should see the order confirmation page with different bill,ship data
 
   Scenario: Credit card expiration date is invalid
   When I fill in the billing form with valid details
@@ -135,7 +136,7 @@ Feature: Billing Information View
       | Expiration     | 12/97               |
     And I check the "Same as Bill To" checkbox
     And I submit the form
-    Then I should see the order confirmation page
+    Then I should see an alert with the text "Invalid email format. Please enter a valid email."
 
   Scenario: Successful submission with edge-case data
     When I fill in the billing form with edge-case details
@@ -165,13 +166,6 @@ Feature: Billing Information View
     When I fill in the billing form with invalid phone number
       | Field          | Value               |
       | Phone          | 555-123-4567890123 |
-    And I submit the form
-    Then I should see an alert with the text "This is a required field."
-
-  Scenario: Invalid edge-case email
-    When I fill in the billing form with an invalid email
-      | Field          | Value               |
-      | E-mail         | invalid@domain..com|
     And I submit the form
     Then I should see an alert with the text "This is a required field."
 

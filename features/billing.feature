@@ -9,7 +9,6 @@ Feature: Billing Information View
     And I proceed with the order
     Then I should see the billing information page
     
-  @onlyThis
   Scenario: Billing and shipping information are the same
   When I fill in the billing form with valid details
     | Field          | Value               |
@@ -26,6 +25,17 @@ Feature: Billing Information View
   And I check the "Same as Bill To" checkbox
   And I submit the form
   Then I should see the order confirmation page
+    | Field          | Value               |
+    | Name           | John Doe            |
+    | Address        | 123 Main St         |
+    | City           | Springfield         |
+    | State          | IL                  |
+    | Zip            | 62704               |
+    | Phone          | 555-123-4567        |
+    | E-mail         | john@example.com    |
+    | Card Type      | Visa                |
+    | Card Number    | 4111111111111111    |
+    | Expiration     | 12/97               |
 
   Scenario: Billing and shipping information are different
   When I fill in the billing form with valid details
@@ -137,7 +147,8 @@ Feature: Billing Information View
     And I check the "Same as Bill To" checkbox
     And I submit the form
     Then I should see an alert with the text "Invalid email format. Please enter a valid email."
-
+  
+  @onlyThis
   Scenario: Successful submission with edge-case data
     When I fill in the billing form with edge-case details
       | Field          | Value                     |
@@ -154,6 +165,17 @@ Feature: Billing Information View
     And I check the "Same as Bill To" checkbox
     And I submit the form
     Then I should see the order confirmation page
+      | Field          | Value                     |
+      | Name           | Maximilianus-Alexandros   |
+      | Address        | 789 Longname Lane Apt #7  |
+      | City           | New Springfield           |
+      | State          | WY                        |
+      | Zip            | 82001                     |
+      | Phone          | 555-123-4567              |
+      | E-mail         | unique.email@rare.coop    |
+      | Card Type      | Visa                      |
+      | Card Number    | 4111111111111111          |
+      | Expiration     | 01/28                     |
 
   Scenario: Invalid phone number format
     When I fill in the billing form with invalid phone number

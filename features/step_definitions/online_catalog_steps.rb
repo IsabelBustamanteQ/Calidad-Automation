@@ -1,81 +1,57 @@
-Then(/^I am on the online catalog homepage$/) do
-  expect(page).to have_content("OnLine Catalog")
-  catalog_table_rows = all(:xpath, "/html/body/form/table/tbody/tr[2]/td/div/center/table/tbody/tr")
-  expect(catalog_table_rows.length).to be > 1
-  expect(page).to have_button("Place An Order")   
+Given(/^I am on the online catalog homepage$/) do
+  expect(@catalog_page.on_catalog_page?).to be true
 end
-
 
 When(/^I select "([^"]*)"$/) do |quantities_and_items_name|
   items_and_quantities = quantities_and_items_name.split(',').map(&:strip)
+  @selected_items = {}
 
   items_and_quantities.each do |item_and_quantity|
     quantity, item_name = item_and_quantity.split(' ', 2)
-    catalog_table = find(:xpath, "/html/body/form/table/tbody/tr[2]/td/div/center/table")
-    catalog_rows = catalog_table.all(:xpath, "tbody/tr")
-    catalog_rows.each_with_index do |row, index|
-      if index > 0         
-        if row.find(:xpath, "td[2]/a/strong").text == item_name.strip
-          price_text = row.find(:xpath, "td[3]").text
-          price_unit = price_text.gsub('$', '').strip.to_f
-  
-          @expected_total ||= 0
-          @expected_total += price_unit * quantity.to_i
-  
-          quantity_input = row.find(:xpath, "td[4]/h1/input")
-          quantity_input.set(quantity)
-  
-          @selected_items[item_name.strip] = quantity.to_i
-  
-          break
-        end
-      end
-    end
+    item = @catalog_page.select_item_quantity(item_name.strip, quantity.to_i)
+    @selected_items[item[:item_name]] = item[:quantity]
+    @expected_total ||= 0
+    @expected_total += item[:price_unit] * item[:quantity]
   end
 end
 
+When(/^I select the item "([^"]*)" and set the quantity to "([^"]*)"$/) do |item_name, quantity|
+  item = @catalog_page.select_item_quantity(item_name.strip, quantity.strip)
+  @selected_items[item[:item_name]] = item[:quantity]
+  @expected_total += item[:price_unit] * item[:quantity]
+end
 
 When(/^I click the "([^"]*)" button$/) do |button_text|
-  click_button(button_text)
+  @catalog_page.click_button_by_text(button_text)
 end
-
 
 Then(/^all quantities should be reset to "0"$/) do
-  all('input[type="text"]').each do |field|
-    expect(field.value).to eq('0')
-  end
+  expect(@catalog_page.all_quantities_reset_to?(0)).to be true
 end
 
 
-Then(/^the selected items with their respective quantities should appear in the order summary$/) do
-  summary_table = find(:xpath, "/html/body/form/table/tbody/tr[1]/td/div/center/table")
-  summary_rows = summary_table.all(:xpath, "tbody/tr")
-
-  summary_rows.each_with_index do |row, index|
-    if index < summary_rows.length - 4 && index > 0
-      row = summary_rows[index] 
-      description_in_row = row.find(:xpath, "td[2]").text.strip
-      quantity_in_row = row.find(:xpath, "td[1]").text.strip
-
-      expect(@selected_items).to have_key(description_in_row)
-
-      expected_quantity = @selected_items[description_in_row].to_s
-      expect(quantity_in_row).to eq(expected_quantity)
-    end
-  end
+Then(/^I should see the item "([^"]*)" with quantity "([^"]*)" in the order summary$/) do |item_name, quantity|
+  expect(@place_order_page.verify_order_summary(@selected_items)).to be true
 end
-
 
 Then(/^the total price should be calculated correctly$/) do
-  formatted_total = "$ #{'%.2f' % @expected_total}"
-  table = find(:xpath, "/html/body/form/table/tbody/tr[1]/td/div/center/table")
-  rows = table.all(:xpath, "tbody/tr")
-  product_total_cell = find(:xpath, "/html/body/form/table/tbody/tr[1]/td/div/center/table/tbody/tr[#{rows.length - 3}]/td[3]")
-  expect(product_total_cell.text).to eq(formatted_total)
+  expected_total = @catalog_page.get_total_price(@selected_items)
+  expect(@place_order_page.verify_total_price(expected_total)).to be true
 end
 
+Then(/^the total price should be "([^"]*)"$/) do |total_price|
+  expected_total = @catalog_page.get_total_price(@selected_items)
+  puts expected_total
+  expect(@place_order_page.verify_total_price(expected_total)).to be true and expect(expected_total).to eq(total_price.to_f)
+end
 
 Then(/^I should see an alert with the message "([^"]*)"$/) do |expected_message|
-  alert = page.driver.browser.switch_to.alert
-  expect(alert.text).to eq(expected_message)
+  expect(@catalog_page.verify_alert_message(expected_message)).to be true
 end
+
+
+# Background:
+# Given I am on the Google homepage
+# And I visit GMO OnLine
+# And I click the "Enter GMO OnLine" button
+# Then I am on the online catalog homepage

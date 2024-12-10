@@ -4,11 +4,21 @@ Feature: Resetting the form in the online catalog
   So that I can clear the form and start a new selection
 
   Background:
-    Given I am on the Google homepage
-    And I visit GMO OnLine
-    And I click the "Enter GMO OnLine" button
-    Then I am on the online catalog homepage
+    Given I am on the online catalog homepage
 
+  @CatalogPage
+  Scenario Outline: Ordering items with specific quantities
+    When I select the item "<Item>" and set the quantity to "<Quantity>"
+    And I click the "Reset Form" button
+    Then all quantities should be reset to "0"
+
+   Examples:
+      | Quantity | Item                    |
+      | 1        | 3 Person Dome Tent      |
+      | 999      | 3 Person Dome Tent      |
+      | 1        | Back Country Shorts     |
+
+  @CatalogPage
   Scenario Outline: Resetting quantities after selecting items
     Given I am on the online catalog homepage
     When I select "<quantities_and_items_name>"

@@ -1,7 +1,7 @@
 Feature: As a internet user
          I want to enter to About the GMO Site
          so I can see more information about GMO Online Site
-@maximaze
+@maximaze @GMOPage @AboutThisSite
 Scenario: Visit GMOPost About This Site Page
   Given I am on the Google homepage
   When I visit GMO OnLine

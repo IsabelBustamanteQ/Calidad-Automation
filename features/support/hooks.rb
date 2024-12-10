@@ -12,7 +12,9 @@ Before '@GMOPage' do
   expect(page).to have_button('Enter GMO OnLine')
   @gmo_home_page=GMOHomePage.new
 end
-
+Before '@AboutThisSite'do
+  @about_page = AboutThisSitePage.new
+end
 Before '@Billing'do
   @billing_page = BillingPage.new
 end
@@ -24,7 +26,6 @@ Before '@CatalogPage' do
   page.driver.browser.manage.window.maximize
   visit('https://demo.borland.com/gmopost/online-catalog.htm')
 end
-
 After '@CatalogPage' do
   @catalog_page = nil
   @place_order_page = nil

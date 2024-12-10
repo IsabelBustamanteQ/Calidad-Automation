@@ -1,23 +1,27 @@
 #Given I am on the Google homepage
 Given(/^I am on the Google homepage$/) do
-  page.driver.browser.manage.window.maximize
-  visit ('/')
+  gmo_home_page = GMOHomePage.new
+  gmo_home_page.visit_google_homepage
 end
 #   When I visit https://demo.borland.com/gmopost/
 When('I visit GMO OnLine') do
-  visit('https://demo.borland.com/gmopost/')
+  gmo_home_page = GMOHomePage.new
+  gmo_home_page.visit_gmo_online
 end
 # Then I see a text that says "Welcome to Green Mountain Outpost's OnLine Catalog!"
 Then(/^I see a text that says "([^"]*)"$/) do |contentMessage|
-  expect(page).to have_content(contentMessage)
+  gmo_home_page = GMOHomePage.new
+  expect(gmo_home_page.has_content?(contentMessage)).to be true
 end
   # And I see a button that says "Enter GMO OnLine"
 Then (/^I see a button that says "([^"]*)"$/) do |buttonMessage|
-  expect(page).to have_button(buttonMessage)
+  gmo_home_page = GMOHomePage.new
+  expect(gmo_home_page.has_button?(buttonMessage)).to be true
 end
 # And I will click "Enter GMO OnLine" button
 When(/^I will click "([^"]*)" button$/) do |enterButton|
-  click_button(enterButton)
+  gmo_home_page = GMOHomePage.new
+  gmo_home_page.click_button_by_name(enterButton)
 end
 # And I see a table with products to buy
 Then('I see a table with products to buy') do

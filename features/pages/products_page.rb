@@ -5,7 +5,7 @@ class ProductsPage
       @product = product
       @tableposition = set_product_position
     end
-
+  
     def set_product_position
       case @product
       when '3 Person Dome Tent'
@@ -24,25 +24,27 @@ class ProductsPage
         raise "Producto no reconocido"
       end
     end
-  
     def see_section?(section_name)
-      expect(current_url).to include("##{section_name.downcase}")
-      @current_position = @tableposition + 3
-      element = find("body > h2:nth-child(#{@current_position})")
-      expect(element.text.strip).to eq(@product)
-      expect(element).to be_visible, "El elemento no está visible en la pantalla actual."
-    end
+        url_contains_section = current_url.include?("##{section_name.downcase}")
+        @current_position = @tableposition + 3
+        element = find("body > h2:nth-child(#{@current_position})")
+        section_text_matches = element.text.strip == @product
+      
+        element_visible = element.visible?
+        { url_contains_section: url_contains_section, section_text_matches: section_text_matches, element_visible: element_visible }
+      end
+      
   
-    def see_unit_price(unit_price)
+    def get_unit_price
       @current_position = @tableposition + 5
       element = find("body > div:nth-child(#{@current_position}) > table > tbody > tr:nth-child(1) > td:nth-child(3)")
-      expect(element.text.strip).to eq(unit_price.strip)
+      element.text.strip
     end
   
-    def see_item_number(item_number)
+    def get_item_number
       @current_position = @tableposition + 5
       element = find("body > div:nth-child(#{@current_position}) > table > tbody > tr:nth-child(3) > td:nth-child(2)")
-      expect(element.text.strip).to eq(item_number.strip)
+      element.text.strip
     end
   end
   

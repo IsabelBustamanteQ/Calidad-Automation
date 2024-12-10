@@ -2,7 +2,7 @@ Feature: As a internet user
          I want to enter to an Specific product
          so I can see more information and details about it  
 @maximaze
-@GMOPage
+@GMOPage @CatalogPage
 Scenario Outline: See a product detail
   Given I am on the online catalog homepage
   When I click on "<productName>"

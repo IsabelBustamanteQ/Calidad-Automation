@@ -15,6 +15,19 @@ class OnlineCatalogPage
     find(:xpath, @catalog_table_xpath).all(:xpath, "tbody/tr")
   end
 
+  def has_products?
+    @has_items = true
+    catalog_table = find(:xpath, @catalog_table_xpath)
+    catalog_rows.each_with_index do |row, index|
+      if index > 0
+        if row.find(:xpath, "td[2]/a/strong").text == ""
+          @has_items = false
+        end
+      end
+    end
+    @has_items
+  end
+
   def find_row_by_item_name(item_name)
     catalog_rows.each_with_index do |row, index|
       next if index.zero? 
@@ -56,5 +69,8 @@ class OnlineCatalogPage
   def verify_alert_message(expected_message)
     alert = page.driver.browser.switch_to.alert
     alert.text == expected_message
+  end
+  def click_on_product(product_name)
+    click_link(product_name)
   end
 end

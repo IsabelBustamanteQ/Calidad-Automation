@@ -1,41 +1,26 @@
 #Given I am on the Google homepage
 Given(/^I am on the Google homepage$/) do
-  gmo_home_page = GMOHomePage.new
-  gmo_home_page.visit_google_homepage
+  @gmo_home_page.visit_google_homepage
 end
 #   When I visit https://demo.borland.com/gmopost/
 When('I visit GMO OnLine') do
-  gmo_home_page = GMOHomePage.new
-  gmo_home_page.visit_gmo_online
+  @gmo_home_page.visit_gmo_online
 end
 # Then I see a text that says "Welcome to Green Mountain Outpost's OnLine Catalog!"
 Then(/^I see a text that says "([^"]*)"$/) do |contentMessage|
-  gmo_home_page = GMOHomePage.new
-  expect(gmo_home_page.has_content?(contentMessage)).to be true
+  expect(@gmo_home_page.has_content?(contentMessage)).to be true
 end
   # And I see a button that says "Enter GMO OnLine"
 Then (/^I see a button that says "([^"]*)"$/) do |buttonMessage|
-  gmo_home_page = GMOHomePage.new
-  expect(gmo_home_page.has_button?(buttonMessage)).to be true
+  expect(@gmo_home_page.has_button?(buttonMessage)).to be true
 end
 # And I will click "Enter GMO OnLine" button
 When(/^I will click "([^"]*)" button$/) do |enterButton|
-  gmo_home_page = GMOHomePage.new
-  gmo_home_page.click_button_by_name(enterButton)
+  @gmo_home_page.click_button_by_name(enterButton)
 end
 # And I see a table with products to buy
 Then('I see a table with products to buy') do
-  @hasItems=true
-  catalog_table = find(:xpath, "/html/body/form/table/tbody/tr[2]/td/div/center/table")
-    catalog_rows = catalog_table.all(:xpath, "tbody/tr")
-    catalog_rows.each_with_index do |row, index|
-      if index > 0         
-        if row.find(:xpath, "td[2]/a/strong").text == ""
-          @hasItems=false
-        end
-      end
-    end
-    expect(@hasItems).to eq(true)
+  expect(@catalog_page.has_products?).to be true
 end
 
 # Given I am on GMO OnLine Catalog Page

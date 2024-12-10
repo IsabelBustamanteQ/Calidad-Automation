@@ -10,6 +10,7 @@ Feature: Billing Information View
     Then I should see the billing information page
     
   @maximize
+  @Billing
   Scenario: Billing and shipping information are the same
   When I fill in the billing form with valid details
     | Field          | Value               |

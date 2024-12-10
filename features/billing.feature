@@ -28,6 +28,7 @@ Feature: Billing Information View
   Then I should see the order confirmation page
 
   @maximize
+  @onlyThis
   Scenario: Billing and shipping information are different
   When I fill in the billing form with valid details
     | Field          | Value               |
@@ -51,7 +52,7 @@ Feature: Billing Information View
     | Zip            | 63019               |
     | Phone          | 555-987-6543        |
   And I submit the form
-  Then I should see the order confirmation page with different bill,ship data
+  Then I should see the order confirmation page with different billing and shipping data
 
   @maximize
   Scenario: Credit card expiration date is invalid

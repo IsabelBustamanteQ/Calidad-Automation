@@ -22,12 +22,38 @@ When('I fill in the billing form with edge-case details') do |table|
 end
 
 When('I fill in the billing form with invalid phone number') do |table|
-  @billing_page.fill_billing_form(table.rows_hash)
+    base_data = {
+        'Name' => 'John Doe',
+        'Address' => '123 Main St',
+        'City' => 'Springfield',
+        'State' => 'IL',
+        'Zip' => '62704',
+        'E-mail' => 'john@example.com',
+        'Card Type' => 'Visa',
+        'Card Number' => '4111111111111111',
+        'Expiration' => '12/99'
+    }
+    # Override phone with the test data
+    phone_data = table.rows_hash
+    base_data['Phone'] = phone_data['Phone']
+      
+    @billing_page.fill_billing_form(base_data)
 end
 
 When('I fill in the billing form without providing mandatory fields') do |table|
-  billing_data = table.rows_hash
-  @billing_page.fill_billing_form(billing_data)
+    base_data = {
+    'E-mail' => 'john@example.com',
+    'Card Type' => 'Visa',
+    'Card Number' => '4111111111111111',
+    'Expiration' => '12/99'
+  }
+  
+  # Override with provided data (which will be empty)
+  mandatory_data = table.rows_hash
+  base_data.merge!(mandatory_data)
+  
+  @billing_page.fill_billing_form(base_data)
+
 end
 
 When('I fill in the shipping form with valid details') do |table|
@@ -59,6 +85,6 @@ Then('I should see the order confirmation page') do
   expect(@billing_page.order_confirmation_present?).to be true
 end
 
-Then('I should see the order confirmation page with different bill,ship data') do
+Then('I should see the order confirmation page with different billing and shipping data') do
   expect(@billing_page.order_confirmation_present?).to be true
 end

@@ -15,6 +15,10 @@ end
 Before '@AboutThisSite'do
   @about_page = AboutThisSitePage.new
 end
+Before '@BrowserTestPage'do
+  @browser_page = BrowserTestPage.new
+end
+
 Before '@Billing'do
   @billing_page = BillingPage.new
 end

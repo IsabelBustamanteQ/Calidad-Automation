@@ -1,10 +1,5 @@
 require_relative '../pages/billing_page'
 
-# Initialize the page object
-Before do
-  @billing_page = BillingPage.new
-end
-
 Given('I am on the billing information page') do
   @billing_page.visit_page
 end

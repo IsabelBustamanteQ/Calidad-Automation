@@ -10,8 +10,12 @@ Before '@GMOPage' do
   page.driver.browser.manage.window.maximize
   visit('https://demo.borland.com/gmopost/')
   expect(page).to have_button('Enter GMO OnLine')
+  @gmo_home_page=GMOHomePage.new
 end
 
+Before '@Billing'do
+  @billing_page = BillingPage.new
+end
 Before '@CatalogPage' do
   @expected_total = 0
   @selected_items = {}

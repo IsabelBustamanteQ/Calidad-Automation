@@ -1,10 +1,13 @@
 Feature: As a internet user
          I want to enter to an Specific product
          so I can see more information and details about it  
-@maximaze
-@GMOPage @CatalogPage
+@maximize
+@HomePage @Catalog
 Scenario Outline: See a product detail
-  Given I am on the online catalog homepage
+  Given I am on the GMO OnLine Page
+  And I see a button that says "Enter GMO OnLine"
+  And I will click "Enter GMO OnLine" button
+  Then I am on the online catalog homepage
   When I click on "<productName>"
   Then I see the Section "<sectionName>"
   And I see the Unit Price "<unitPrice>"

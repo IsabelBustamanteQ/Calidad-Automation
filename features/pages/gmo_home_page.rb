@@ -6,7 +6,6 @@ class GMOHomePage
     end
   
     def visit_google_homepage
-      page.driver.browser.manage.window.maximize
       visit('/')
     end
   
@@ -14,6 +13,10 @@ class GMOHomePage
       visit('https://demo.borland.com/gmopost/')
     end
   
+    def on_home_page?
+      has_content?("GMO OnLine") && has_content?("Welcome to Green Mountain Outpost's OnLine Catalog!")
+    end
+
     def has_content?(content_message)
       page.has_content?(content_message)
     end

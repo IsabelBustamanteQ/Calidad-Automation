@@ -1,15 +1,20 @@
 After do 
     Capybara.current_session.driver.quit
+    @catalog_page = nil
+    @place_order_page = nil
+    @expected_total = 0
+    @selected_items = {}
+    @gmo_home_page = nil
+    @about_page = nil
+    @browser_page = nil
+    @order_confirmation_page = nil
+    @billing_page = nil
 end
-
 Before '@maximize' do
   page.driver.browser.manage.window.maximize
 end
-
-Before '@GMOPage' do
-  page.driver.browser.manage.window.maximize
+Before '@HomePage' do
   visit('https://demo.borland.com/gmopost/')
-  expect(page).to have_button('Enter GMO OnLine')
   @gmo_home_page=GMOHomePage.new
 end
 Before '@AboutThisSite'do
@@ -24,19 +29,11 @@ end
 Before '@Billing'do
   @billing_page = BillingPage.new
 end
-Before '@CatalogPage' do
+Before '@Catalog' do
   @expected_total = 0
   @selected_items = {}
   @catalog_page = OnlineCatalogPage.new
   @place_order_page = PlaceOrderPage.new
-  page.driver.browser.manage.window.maximize
-  visit('https://demo.borland.com/gmopost/online-catalog.htm')
-end
-After '@CatalogPage' do
-  @catalog_page = nil
-  @place_order_page = nil
-  @expected_total = 0
-  @selected_items = {}
 end
 
 def get_items_price

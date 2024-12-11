@@ -1,7 +1,8 @@
 Feature: As a internet user
          I want to enter to Browser Test Page
          so I can compare how different browsers render web content
-@maximaze @GMOPage @BrowserTestPage
+         
+@maximize @HomePage @BrowserTestPage
 Scenario: Visit GMOPost Browser Test Page
   Given I am on the Google homepage
   When I visit GMO OnLine

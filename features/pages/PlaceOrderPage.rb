@@ -34,4 +34,8 @@ class PlaceOrderPage
 
     displayed_total == expected_total.to_f
   end
+
+  def click_order_button()
+    click_button(@order_button)
+  end
 end

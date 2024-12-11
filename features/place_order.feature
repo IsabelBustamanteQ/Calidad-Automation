@@ -4,9 +4,13 @@ Feature: Place an order in the online catalog
   So that I can place an order successfully
 
   Background:
-    Given I am on the online catalog homepage
+    Given I am on the GMO OnLine Page
+    And I see a button that says "Enter GMO OnLine"
+    And I will click "Enter GMO OnLine" button
+    Then I am on the online catalog homepage
+    And I see a table with products to buy
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario Outline: Prevent zero quantities for any catalog item
     When I select the item "<Item>" and set the quantity to "<Quantity>"
     And I click the "Place An Order" button
@@ -21,7 +25,7 @@ Feature: Place an order in the online catalog
       | 0        | Hiking Boots            |
       | 0        | Padded Socks            |
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario Outline: Prevent invalid quantities for any catalog item
     When I select the item "<Item>" and set the quantity to "<Quantity>"
     And I click the "Place An Order" button
@@ -48,7 +52,7 @@ Feature: Place an order in the online catalog
       | cinco    | Hiking Boots            |
       | seis     | Padded Socks            |
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario Outline: Ordering one item with variable quantities
     When I select the item "<Item>" and set the quantity to "<Quantity>"
     And I click the "Place An Order" button
@@ -70,7 +74,7 @@ Feature: Place an order in the online catalog
       | 1        | External Frame Backpack | 179.95        |
       | 999      | External Frame Backpack | 179770.05     |            
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario: Ordering 2 items in the online catalog
     When I select the item "Back Country Shorts" and set the quantity to "10"
     And I select the item "Hiking Boots" and set the quantity to "5"
@@ -79,7 +83,7 @@ Feature: Place an order in the online catalog
     And I should see the item "Hiking Boots" with quantity "5" in the order summary
     And the total price should be "799"
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario: Ordering 3 items in the online catalog
     When I select the item "Back Country Shorts" and set the quantity to "2"
     And I select the item "Hiking Boots" and set the quantity to "3"
@@ -90,7 +94,7 @@ Feature: Place an order in the online catalog
     And I should see the item "Padded Socks" with quantity "6" in the order summary
     And the total price should be "499.54"
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario: Ordering 4 items in the online catalog
     When I select the item "Back Country Shorts" and set the quantity to "1"
     And I select the item "Hiking Boots" and set the quantity to "2"
@@ -103,7 +107,7 @@ Feature: Place an order in the online catalog
     And I should see the item "Glacier Sun Glasses" with quantity "1" in the order summary
     And the total price should be "372.71"
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario: Ordering 5 items in the online catalog
     When I select the item "Back Country Shorts" and set the quantity to "1"
     And I select the item "Hiking Boots" and set the quantity to "1"
@@ -118,7 +122,7 @@ Feature: Place an order in the online catalog
     And I should see the item "External Frame Backpack" with quantity "1" in the order summary
     And the total price should be "530.74"
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario: Ordering all 6 items in the online catalog
     When I select the item "3 Person Dome Tent" and set the quantity to "1"
     And I select the item "Back Country Shorts" and set the quantity to "1"

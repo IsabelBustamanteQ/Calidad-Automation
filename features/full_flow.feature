@@ -1,7 +1,8 @@
 Feature: As a internet user
          I want to enter to GMO OnLine
          so I can place an order
-@maximaze @GMOPage @CatalogPage @Billing
+
+@maximize @HomePage @Catalog @Billing @Confirmation
 Scenario Outline: Place an order
   Given I am on the Google homepage
   When I visit GMO OnLine
@@ -11,8 +12,8 @@ Scenario Outline: Place an order
   And I click the "Place An Order" button
   And I should see the item "<Item>" with quantity "<Quantity>" in the order summary
   And the total price should be "<Total_Price>"
-  And I click the "Proceed With Order" button
-  And I should see the billing information page
+  And I click the Proceed With Order button
+  Then I should see the billing information page
   And I fill in the billing form with valid details
     | Field          | Value               |
     | Name           | John Doe            |
@@ -45,7 +46,7 @@ Scenario Outline: Place an order
       | 999      | External Frame Backpack | 179770.05     | 
     
 
-@maximaze @GMOPage @CatalogPage @Billing
+@maximize @HomePage @Catalog @Billing @Confirmation
 Scenario Outline: Place an order and Return to Home Page
   Given I am on the Google homepage
   When I visit GMO OnLine
@@ -55,8 +56,8 @@ Scenario Outline: Place an order and Return to Home Page
   And I click the "Place An Order" button
   And I should see the item "<Item>" with quantity "<Quantity>" in the order summary
   And the total price should be "<Total_Price>"
-  And I click the "Proceed With Order" button
-  And I should see the billing information page
+  And I click the Proceed With Order button
+  Then I should see the billing information page
   And I fill in the billing form with valid details
     | Field          | Value               |
     | Name           | John Doe            |

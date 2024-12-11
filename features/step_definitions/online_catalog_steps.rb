@@ -1,3 +1,7 @@
+Given(/^I am on the GMO OnLine Page$/) do
+  expect(@gmo_home_page.on_home_page?).to be true
+end
+
 Given(/^I am on the online catalog homepage$/) do
   expect(@catalog_page.on_catalog_page?).to be true
 end
@@ -48,10 +52,3 @@ end
 Then(/^I should see an alert with the message "([^"]*)"$/) do |expected_message|
   expect(@catalog_page.verify_alert_message(expected_message)).to be true
 end
-
-
-# Background:
-# Given I am on the Google homepage
-# And I visit GMO OnLine
-# And I click the "Enter GMO OnLine" button
-# Then I am on the online catalog homepage

@@ -1,8 +1,9 @@
 Feature: As a internet user
          I want to enter to GMO OnLine
          so I test that it works correctly
-@maximaze
-@GMOPage
+         
+@maximize
+@HomePage
 Scenario: Visit GMOPost and see welcome text
   Given I am on the Google homepage
   When I visit GMO OnLine
@@ -10,8 +11,8 @@ Scenario: Visit GMOPost and see welcome text
   And I see a button that says "Enter GMO OnLine"
   And I see a button that says "About The GMO Site"
   And I see a button that says "Browser Test Page"
-@maximaze
-@GMOPage @CatalogPage
+@maximize
+@HomePage @Catalog
 Scenario: Visit GMOPost catalog
   Given I am on the Google homepage
   When I visit GMO OnLine

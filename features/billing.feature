@@ -4,14 +4,18 @@ Feature: Billing Information View
   So that I can place an order
 
   Background:
-    Given I am on the main catalog page
-    When I add an item to the cart and place the order
-    And I proceed with the order
+    Given I am on the GMO OnLine Page
+    And I see a button that says "Enter GMO OnLine"
+    And I will click "Enter GMO OnLine" button
+    Then I am on the online catalog homepage
+    And I see a table with products to buy
+    When I select the item "Back Country Shorts" and set the quantity to "1"
+    And I click the "Place An Order" button
+    And I click the Proceed With Order button
     Then I should see the billing information page
     
   @maximize
-  @Billing
-  @Confirmation
+  @Catalog @HomePage  @Confirmation  @Billing
   Scenario: Billing and shipping information are the same
   When I fill in the billing form with valid details
     | Field          | Value               |
@@ -30,8 +34,7 @@ Feature: Billing Information View
   Then I should see the order confirmation page
 
   @maximize
-  @Billing
-  @Confirmation
+  @Catalog @HomePage  @Confirmation  @Billing
   Scenario: Billing and shipping information are different
   When I fill in the billing form with valid details
     | Field          | Value               |
@@ -58,7 +61,7 @@ Feature: Billing Information View
   Then I should see the order confirmation page with different billing and shipping data
 
   @maximize
-  @Billing
+  @Catalog @HomePage @Billing
   Scenario: Credit card expiration date is invalid
   When I fill in the billing form with valid details
     | Field          | Value               |
@@ -77,7 +80,7 @@ Feature: Billing Information View
   Then I should see an alert with the text "Please enter a valid date of the form 'MM/YY' in this field."
 
   @maximize
-  @Billing
+  @Catalog @HomePage @Billing
   Scenario: Billing form has missing required fields
     When I fill in the billing form with invalid details
       | Field          | Value               |
@@ -95,7 +98,7 @@ Feature: Billing Information View
     Then I should see an alert with the text "This is a required field."
 
   @maximize
-  @Billing
+  @Catalog @HomePage @Billing
   Scenario: "Same as Bill To" checkbox is not checked and shipping form is empty
     When I fill in the billing form with valid details
       | Field          | Value               |
@@ -115,7 +118,7 @@ Feature: Billing Information View
     Then I should see an alert with the text "This is a required field."
 
   @maximize
-  @Billing
+  @Catalog @HomePage @Billing
   Scenario: "Same as Bill To" checkbox is not checked and shipping form is empty
     When I fill in the billing form with valid details
       | Field          | Value               |
@@ -135,7 +138,7 @@ Feature: Billing Information View
     Then I should see an alert with the text "This is a required field."
 
   @maximize
-  @Billing
+  @Catalog @HomePage @Billing
   Scenario: Billing form contains invalid email format
     When I fill in the billing form with invalid details
       | Field          | Value               |
@@ -154,7 +157,7 @@ Feature: Billing Information View
     Then I should see an alert with the text "Invalid email format. Please enter a valid email."
 
   @maximize
-  @Billing
+  @Catalog @HomePage @Billing @Confirmation
   Scenario: Successful submission with edge-case data
     When I fill in the billing form with edge-case details
       | Field          | Value                     |
@@ -173,7 +176,7 @@ Feature: Billing Information View
     Then I should see the order confirmation page
 
   @maximize
-  @Billing
+  @Catalog @HomePage @Billing
   Scenario: Invalid phone number format
     When I fill in the billing form with invalid phone number
       | Field          | Value               |
@@ -182,7 +185,7 @@ Feature: Billing Information View
     Then I should see an alert with the text "This is a required field."
 
   @maximize
-  @Billing
+  @Catalog @HomePage @Billing
   Scenario: Invalid phone number length
     When I fill in the billing form with invalid phone number
       | Field          | Value               |
@@ -191,7 +194,7 @@ Feature: Billing Information View
     Then I should see an alert with the text "This is a required field."
 
   @maximize
-  @Billing
+  @Catalog @HomePage @Billing
   Scenario: Missing mandatory billing details
     When I fill in the billing form without providing mandatory fields
       | Field          | Value               |
@@ -201,7 +204,7 @@ Feature: Billing Information View
     Then I should see an alert with the text "This is a required field."
 
   @maximize
-  @Billing
+  @Catalog @HomePage @Billing
   Scenario: Billing form contains an invalid ZIP code
     When I fill in the billing form with invalid details
       | Field          | Value               |

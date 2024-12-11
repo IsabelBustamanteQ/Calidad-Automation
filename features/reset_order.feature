@@ -4,9 +4,13 @@ Feature: Resetting the form in the online catalog
   So that I can clear the form and start a new selection
 
   Background:
-    Given I am on the online catalog homepage
+    Given I am on the GMO OnLine Page
+    And I see a button that says "Enter GMO OnLine"
+    And I will click "Enter GMO OnLine" button
+    Then I am on the online catalog homepage
+    And I see a table with products to buy
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario Outline: Resetting items with specific quantities
     When I select the item "<Item>" and set the quantity to "<Quantity>"
     And I click the "Reset Form" button
@@ -28,14 +32,14 @@ Feature: Resetting the form in the online catalog
       | 999      | External Frame Backpack |   
 
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario: Resetting quantities after selecting 2 items
     When I select the item "Back Country Shorts" and set the quantity to "10"
     And I select the item "Hiking Boots" and set the quantity to "5"
     And I click the "Reset Form" button
     Then all quantities should be reset to "0"
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario: Resetting quantities after selecting 3 items
     When I select the item "Back Country Shorts" and set the quantity to "2"
     And I select the item "Hiking Boots" and set the quantity to "3"
@@ -43,7 +47,7 @@ Feature: Resetting the form in the online catalog
     And I click the "Reset Form" button
     Then all quantities should be reset to "0"
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario: Resetting quantities after selecting 4 items
     When I select the item "Back Country Shorts" and set the quantity to "1"
     And I select the item "Hiking Boots" and set the quantity to "2"
@@ -52,7 +56,7 @@ Feature: Resetting the form in the online catalog
     And I click the "Reset Form" button
     Then all quantities should be reset to "0"
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario: Resetting quantities after selecting 5 items
     When I select the item "Back Country Shorts" and set the quantity to "1"
     And I select the item "Hiking Boots" and set the quantity to "1"
@@ -62,7 +66,7 @@ Feature: Resetting the form in the online catalog
     And I click the "Reset Form" button
     Then all quantities should be reset to "0"
 
-  @CatalogPage
+  @maximize @Catalog @HomePage
   Scenario: Ordering all 6 items in the online catalog
     When I select the item "3 Person Dome Tent" and set the quantity to "1"
     And I select the item "Back Country Shorts" and set the quantity to "1"

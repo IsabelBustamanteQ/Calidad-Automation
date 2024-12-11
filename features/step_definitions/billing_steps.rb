@@ -1,10 +1,3 @@
-require_relative '../pages/billing_page'
-require_relative '../pages/order_confirmation_page'
-
-Given('I am on the billing information page') do
-  @billing_page.visit_page
-end
-
 When('I fill in the billing form with valid details') do |table|
   @billing_page.fill_billing_form(table.rows_hash)
 end
@@ -29,7 +22,6 @@ When('I fill in the billing form with invalid phone number') do |table|
         'Card Number' => '4111111111111111',
         'Expiration' => '12/99'
     }
-    # Override phone with the test data
     phone_data = table.rows_hash
     base_data['Phone'] = phone_data['Phone']
       
@@ -44,7 +36,7 @@ When('I fill in the billing form without providing mandatory fields') do |table|
     'Expiration' => '12/99'
   }
   
-  # Override with provided data (which will be empty)
+
   mandatory_data = table.rows_hash
   base_data.merge!(mandatory_data)
   
@@ -78,11 +70,9 @@ Then('I should see an alert with the text {string}') do |expected_text|
 end
 
 Then('I should see the order confirmation page') do
-  order_confirmation_page = OrderConfirmationPage.new
-  expect(order_confirmation_page.order_confirmation_present?).to be true
+  expect(@order_confirmation_page.order_confirmation_present?).to be true
 end
 
 Then('I should see the order confirmation page with different billing and shipping data') do
-  order_confirmation_page = OrderConfirmationPage.new
-  expect(order_confirmation_page.order_confirmation_present?).to be true
+  expect(@order_confirmation_page.order_confirmation_present?).to be true
 end

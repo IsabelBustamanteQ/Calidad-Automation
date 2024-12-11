@@ -1,7 +1,6 @@
 class BillingPage
     include Capybara::DSL
   
-    # Billing Form Fields
     BILLING_NAME = 'billName'
     BILLING_ADDRESS = 'billAddress'
     BILLING_CITY = 'billCity'
@@ -12,8 +11,7 @@ class BillingPage
     CARD_TYPE = 'CardType'
     CARD_NUMBER = 'CardNumber'
     CARD_EXPIRATION = 'CardDate'
-  
-    # Shipping Form Fields
+
     SHIPPING_SAME_AS_BILL_CHECKBOX = 'shipSameAsBill'
     SHIPPING_NAME = 'shipName'
     SHIPPING_ADDRESS = 'shipAddress'
@@ -22,11 +20,14 @@ class BillingPage
     SHIPPING_ZIP = 'shipZipCode'
     SHIPPING_PHONE = 'shipPhone'
   
-    # Submit Button
     SUBMIT_BUTTON = 'bSubmit'
   
     def visit_page
       visit 'https://demo.borland.com/gmopost/'
+    end
+
+    def on_billing_page?
+      has_content?('Billing Information') && has_button?("Place The Order")
     end
   
     def fill_billing_form(billing_data)

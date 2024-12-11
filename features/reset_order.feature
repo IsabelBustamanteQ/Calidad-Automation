@@ -7,32 +7,68 @@ Feature: Resetting the form in the online catalog
     Given I am on the online catalog homepage
 
   @CatalogPage
-  Scenario Outline: Ordering items with specific quantities
+  Scenario Outline: Resetting items with specific quantities
     When I select the item "<Item>" and set the quantity to "<Quantity>"
     And I click the "Reset Form" button
     Then all quantities should be reset to "0"
 
-   Examples:
+    Examples:
       | Quantity | Item                    |
       | 1        | 3 Person Dome Tent      |
       | 999      | 3 Person Dome Tent      |
       | 1        | Back Country Shorts     |
+      | 999      | Back Country Shorts     |
+      | 1        | Hiking Boots            |
+      | 999      | Hiking Boots            |
+      | 1        | Padded Socks            |
+      | 999      | Padded Socks            |
+      | 1        | Glacier Sun Glasses     |
+      | 999      | Glacier Sun Glasses     |
+      | 1        | External Frame Backpack |
+      | 999      | External Frame Backpack |   
+
 
   @CatalogPage
-  Scenario Outline: Resetting quantities after selecting items
-    Given I am on the online catalog homepage
-    When I select "<quantities_and_items_name>"
+  Scenario: Resetting quantities after selecting 2 items
+    When I select the item "Back Country Shorts" and set the quantity to "10"
+    And I select the item "Hiking Boots" and set the quantity to "5"
     And I click the "Reset Form" button
     Then all quantities should be reset to "0"
 
-    Examples:
-      | quantities_and_items_name                                                                                           |
-      | 1 Glacier Sun Glasses, 2 3 Person Dome Tent, 1 Hiking Boots, 2 Back Country Shorts, 3 External Frame Backpack, 5 Padded Socks |
-      | 999 Glacier Sun Glasses, 999 3 Person Dome Tent, 999 Hiking Boots, 999 Back Country Shorts, 999 External Frame Backpack, 5 Padded Socks |
-      | 1 3 Person Dome Tent, 2 External Frame Backpack, 3 Glacier Sun Glasses, 2 Padded Socks, 1 Hiking Boots             |
-      | 2 3 Person Dome Tent, 3 External Frame Backpack, 1 Glacier Sun Glasses, 2 Padded Socks, 3 Back Country Shorts      |
-      | 3 3 Person Dome Tent, 1 External Frame Backpack, 2 Hiking Boots, 1 Glacier Sun Glasses, 2 Back Country Shorts      |
-      | 1 3 Person Dome Tent, 1 External Frame Backpack, 3 Glacier Sun Glasses, 999 Padded Socks, 1 Hiking Boots             |
-      | 2 External Frame Backpack, 999 Hiking Boots, 3 Back Country Shorts, 2 Glacier Sun Glasses, 1 Padded Socks            |
-      | 999 3 Person Dome Tent, 2 Glacier Sun Glasses, 1 Padded Socks, 3 Hiking Boots, 2 External Frame Backpack             |
-      | 2 3 Person Dome Tent, 3 Glacier Sun Glasses, 1 Hiking Boots, 999 External Frame Backpack, 1 Back Country Shorts      |
+  @CatalogPage
+  Scenario: Resetting quantities after selecting 3 items
+    When I select the item "Back Country Shorts" and set the quantity to "2"
+    And I select the item "Hiking Boots" and set the quantity to "3"
+    And I select the item "Padded Socks" and set the quantity to "6"
+    And I click the "Reset Form" button
+    Then all quantities should be reset to "0"
+
+  @CatalogPage
+  Scenario: Resetting quantities after selecting 4 items
+    When I select the item "Back Country Shorts" and set the quantity to "1"
+    And I select the item "Hiking Boots" and set the quantity to "2"
+    And I select the item "Padded Socks" and set the quantity to "3"
+    And I select the item "Glacier Sun Glasses" and set the quantity to "1"
+    And I click the "Reset Form" button
+    Then all quantities should be reset to "0"
+
+  @CatalogPage
+  Scenario: Resetting quantities after selecting 5 items
+    When I select the item "Back Country Shorts" and set the quantity to "1"
+    And I select the item "Hiking Boots" and set the quantity to "1"
+    And I select the item "Padded Socks" and set the quantity to "4"
+    And I select the item "Glacier Sun Glasses" and set the quantity to "2"
+    And I select the item "External Frame Backpack" and set the quantity to "1"
+    And I click the "Reset Form" button
+    Then all quantities should be reset to "0"
+
+  @CatalogPage
+  Scenario: Ordering all 6 items in the online catalog
+    When I select the item "3 Person Dome Tent" and set the quantity to "1"
+    And I select the item "Back Country Shorts" and set the quantity to "1"
+    And I select the item "Hiking Boots" and set the quantity to "1"
+    And I select the item "Padded Socks" and set the quantity to "2"
+    And I select the item "Glacier Sun Glasses" and set the quantity to "2"
+    And I select the item "External Frame Backpack" and set the quantity to "1"
+    And I click the "Reset Form" button
+    Then all quantities should be reset to "0"

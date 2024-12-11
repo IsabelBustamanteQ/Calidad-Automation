@@ -1,10 +1,8 @@
 class OrderConfirmationPage
     include Capybara::DSL
   
-    # Order Confirmation Page Locators
     ORDER_CONFIRMATION_MESSAGE = 'Thank you for shopping with Green Mountain Outpost'
     
-    Billing and Shipping Information Locators
     BILL_TO_NAME = 'table tr:nth-child(1) td:nth-child(2) strong'
     BILL_TO_ADDRESS = 'table tr:nth-child(2) td:nth-child(2) strong'
     BILL_TO_CITY_STATE_ZIP = 'table tr:nth-child(3) td:nth-child(2) strong'

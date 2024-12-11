@@ -1,4 +1,5 @@
 require_relative '../pages/billing_page'
+require_relative '../pages/order_confirmation_page'
 
 Given('I am on the billing information page') do
   @billing_page.visit_page
@@ -77,9 +78,11 @@ Then('I should see an alert with the text {string}') do |expected_text|
 end
 
 Then('I should see the order confirmation page') do
-  expect(@billing_page.order_confirmation_present?).to be true
+  order_confirmation_page = OrderConfirmationPage.new
+  expect(order_confirmation_page.order_confirmation_present?).to be true
 end
 
 Then('I should see the order confirmation page with different billing and shipping data') do
-  expect(@billing_page.order_confirmation_present?).to be true
+  order_confirmation_page = OrderConfirmationPage.new
+  expect(order_confirmation_page.order_confirmation_present?).to be true
 end

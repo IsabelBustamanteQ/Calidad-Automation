@@ -18,7 +18,9 @@ end
 Before '@BrowserTestPage'do
   @browser_page = BrowserTestPage.new
 end
-
+Before '@Confirmation' do
+  @order_confirmation_page = OrderConfirmationPage.new
+end
 Before '@Billing'do
   @billing_page = BillingPage.new
 end

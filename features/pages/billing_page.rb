@@ -83,8 +83,4 @@ class BillingPage
       email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
       email_regex.match?(email)
     end
-  
-    def order_confirmation_present?
-      page.has_content?('Thank you for shopping with Green Mountain Outpost')
-    end
   end

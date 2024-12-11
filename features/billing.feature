@@ -11,6 +11,7 @@ Feature: Billing Information View
     
   @maximize
   @Billing
+  @Confirmation
   Scenario: Billing and shipping information are the same
   When I fill in the billing form with valid details
     | Field          | Value               |
@@ -29,8 +30,8 @@ Feature: Billing Information View
   Then I should see the order confirmation page
 
   @maximize
-  @onlyThis
   @Billing
+  @Confirmation
   Scenario: Billing and shipping information are different
   When I fill in the billing form with valid details
     | Field          | Value               |
